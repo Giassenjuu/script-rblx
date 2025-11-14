@@ -1,0 +1,29 @@
+
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+local mouse = player:GetMouse()
+
+mouse.KeyDown:Connect(function(key)
+    if key == "e" then
+        local tool = Instance.new("Tool")
+        tool.Name = "ExploitTool"
+        tool.Parent = player.Backpack
+
+        local handle = Instance.new("Part")
+        handle.Size = Vector3.new(1, 1, 1)
+        handle.Parent = tool
+
+        local function onEquip()
+            local function onClick()
+                local part = Instance.new("Part")
+                part.Size = Vector3.new(1, 1, 1)
+                part.Position = mouse.Hit.p
+                part.Parent = workspace
+            end
+
+            mouse.Button1Down:Connect(onClick)
+        end
+
+        tool.Equipped:Connect(onEquip)
+    end
+end)
